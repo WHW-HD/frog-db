@@ -13,3 +13,15 @@ Docker with:
 |                          |     |          |     |         |
 +--------------------------+     +----------+     +---------+
 ```
+
+## run
+
+Start the Docker with: 
+
+```
+docker-compose up
+```
+
+Grafana: http://localhost:3000 
+user: admin
+password: admin
