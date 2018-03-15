@@ -14,6 +14,16 @@ Docker with:
 +--------------------------+     +----------+     +---------+
 ```
 
+## prepare
+
+Pull Docker images:
+
+```
+docker pull influxdb
+docker pull grafana/grafana
+docker pull telegraf
+```
+
 ## run
 
 Start the Docker with: 
