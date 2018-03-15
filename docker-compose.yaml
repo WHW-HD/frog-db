@@ -1,0 +1,50 @@
+version: '3'
+networks:
+  backend:
+services:
+
+  influxdb: # https://hub.docker.com/_/influxdb/
+    image: influxdb:latest
+    container_name: influxdb
+    networks:
+      - backend
+    ports:
+      - "8086:8086"
+      - "8090:8090"
+    env_file:
+      - 'influxdb.env'
+    volumes:
+      # get default config: docker run --rm influxdb influxd config > influxdb.conf
+      #- ./influxdb.conf:/etc/influxdb/influxdb.conf:ro
+      # Data persistency
+      - ./influxdb:/var/lib/influxdb
+
+  telegraf: # https://hub.docker.com/_/telegraf/
+    image: telegraf:latest
+    container_name: telegraf
+    networks:
+      - backend
+    volumes:
+      # get default config: docker run --rm telegraf telegraf config > telegraf.conf
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+
+  grafana: # https://hub.docker.com/r/grafana/grafana/
+    image: grafana/grafana:latest
+    container_name: grafana
+    networks:
+      - backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - 'grafana.env'
+
+#  mosquitto: # https://hub.docker.com/_/eclipse-mosquitto/
+#    image: eclipse-mosquitto:latest
+#    container_name: mosquitto
+#    networks:
+#      - backend
+#    ports:
+#      - "1883:1883"
+#      - "9001:9001"
+#    volumes:
+#      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
