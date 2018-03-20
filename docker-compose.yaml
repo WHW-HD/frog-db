@@ -39,6 +39,8 @@ services:
       - 'grafana.env'
     volumes:
       - ./datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
+      - ./dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml:ro
+      - ./dashboard.json:/var/lib/grafana/dashboards/dashboard.json
 
 #  mosquitto: # https://hub.docker.com/_/eclipse-mosquitto/
 #    image: eclipse-mosquitto:latest
